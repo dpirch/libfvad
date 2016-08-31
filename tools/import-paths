@@ -1,0 +1,37 @@
+# This is a hand-edited list of all files we import from the WebRTC repository.
+# It is read by the import.sh script.
+
+webrtc/common_audio/signal_processing/include/signal_processing_library.h
+webrtc/common_audio/signal_processing/include/spl_inl.h
+
+webrtc/common_audio/signal_processing/division_operations.c
+webrtc/common_audio/signal_processing/energy.c
+webrtc/common_audio/signal_processing/get_scaling_square.c
+webrtc/common_audio/signal_processing/resample_48khz.c
+webrtc/common_audio/signal_processing/resample_by_2_internal.c
+webrtc/common_audio/signal_processing/resample_by_2_internal.h
+webrtc/common_audio/signal_processing/signal_processing_unittest.cc
+webrtc/common_audio/signal_processing/spl_inl.c
+
+webrtc/common_audio/vad/include/webrtc_vad.h
+
+webrtc/common_audio/vad/vad_core.c
+webrtc/common_audio/vad/vad_core.h
+webrtc/common_audio/vad/vad_core_unittest.cc
+webrtc/common_audio/vad/vad_filterbank.c
+webrtc/common_audio/vad/vad_filterbank.h
+webrtc/common_audio/vad/vad_filterbank_unittest.cc
+webrtc/common_audio/vad/vad_gmm.c
+webrtc/common_audio/vad/vad_gmm.h
+webrtc/common_audio/vad/vad_gmm_unittest.cc
+webrtc/common_audio/vad/vad_sp.c
+webrtc/common_audio/vad/vad_sp.h
+webrtc/common_audio/vad/vad_sp_unittest.cc
+webrtc/common_audio/vad/vad_unittest.cc
+webrtc/common_audio/vad/vad_unittest.h
+webrtc/common_audio/vad/webrtc_vad.c
+
+AUTHORS
+webrtc/LICENSE
+webrtc/LICENSE_THIRD_PARTY
+webrtc/PATENTS
