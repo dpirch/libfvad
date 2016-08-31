@@ -19,7 +19,7 @@
 #define WEBRTC_SPL_SIGNAL_PROCESSING_LIBRARY_H_
 
 #include <string.h>
-#include "webrtc/typedefs.h"
+#include "../common.h"
 
 // Macros specific for the fixed point implementation
 #define WEBRTC_SPL_WORD16_MAX       32767
@@ -140,7 +140,7 @@ extern "C" {
   memmove(v1, v2, (length) * sizeof(int16_t))
 
 // inline functions:
-#include "webrtc/common_audio/signal_processing/include/spl_inl.h"
+#include "spl_inl.h"
 
 // Initialize SPL. Currently it contains only function pointer initialization.
 // If the underlying platform is known to be ARM-Neon (WEBRTC_ARCH_ARM_NEON

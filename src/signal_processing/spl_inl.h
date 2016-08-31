@@ -15,15 +15,15 @@
 #ifndef WEBRTC_SPL_SPL_INL_H_
 #define WEBRTC_SPL_SPL_INL_H_
 
-#ifdef WEBRTC_ARCH_ARM_V7
+#if 0 // #ifdef WEBRTC_ARCH_ARM_V7
 #include "webrtc/common_audio/signal_processing/include/spl_inl_armv7.h"
 #else
 
-#if defined(MIPS32_LE)
+#if 0 // #if defined(MIPS32_LE)
 #include "webrtc/common_audio/signal_processing/include/spl_inl_mips.h"
 #endif
 
-#if !defined(MIPS_DSP_R1_LE)
+#if 1 // #if !defined(MIPS_DSP_R1_LE)
 static __inline int16_t WebRtcSpl_SatW32ToW16(int32_t value32) {
   int16_t out16 = (int16_t) value32;
 
@@ -44,7 +44,7 @@ static __inline int16_t WebRtcSpl_SubSatW16(int16_t var1, int16_t var2) {
 }
 #endif  // #if !defined(MIPS_DSP_R1_LE)
 
-#if !defined(MIPS32_LE)
+#if 1 // #if !defined(MIPS32_LE)
 static __inline int16_t WebRtcSpl_GetSizeInBits(uint32_t n) {
   int bits;
 
@@ -134,7 +134,7 @@ static __inline int32_t WebRtc_MulAccumW16(int16_t a, int16_t b, int32_t c) {
 
 // The following functions have no optimized versions.
 // TODO(kma): Consider saturating add/sub instructions in X86 platform.
-#if !defined(MIPS_DSP_R1_LE)
+#if 1 // #if !defined(MIPS_DSP_R1_LE)
 static __inline int32_t WebRtcSpl_AddSatW32(int32_t l_var1, int32_t l_var2) {
   int32_t l_sum;
 

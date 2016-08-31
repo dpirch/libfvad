@@ -8,21 +8,17 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "webrtc/common_audio/vad/include/webrtc_vad.h"
+#include "../include/fvad.h"
 
 #include <stdlib.h>
-#include <string.h>
-
-#include "webrtc/common_audio/signal_processing/include/signal_processing_library.h"
-#include "webrtc/common_audio/vad/vad_core.h"
-#include "webrtc/typedefs.h"
+#include "vad/vad_core.h"
 
 static const int kInitCheck = 42;
 static const int kValidRates[] = { 8000, 16000, 32000, 48000 };
 static const size_t kRatesSize = sizeof(kValidRates) / sizeof(*kValidRates);
 static const int kMaxFrameLengthMs = 30;
 
-int WebRtcVad_Create(VadInst** handle) {
+int fvad_Create(VadInst** handle) {
   VadInstT* self = NULL;
 
   if (handle == NULL) {
@@ -44,7 +40,7 @@ int WebRtcVad_Create(VadInst** handle) {
   return 0;
 }
 
-void WebRtcVad_Free(VadInst* handle) {
+void fvad_Free(VadInst* handle) {
   free(handle);
 }
 
@@ -55,7 +51,7 @@ int WebRtcVad_Init(VadInst* handle) {
 }
 
 // TODO(bjornv): Move WebRtcVad_set_mode_core() code here.
-int WebRtcVad_set_mode(VadInst* handle, int mode) {
+int fvad_set_mode(VadInst* handle, int mode) {
   VadInstT* self = (VadInstT*) handle;
 
   if (handle == NULL) {
@@ -68,7 +64,7 @@ int WebRtcVad_set_mode(VadInst* handle, int mode) {
   return WebRtcVad_set_mode_core(self, mode);
 }
 
-int WebRtcVad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
+int fvad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
                       int frame_length) {
   int vad = -1;
   VadInstT* self = (VadInstT*) handle;
@@ -83,7 +79,7 @@ int WebRtcVad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
   if (audio_frame == NULL) {
     return -1;
   }
-  if (WebRtcVad_ValidRateAndFrameLength(fs, frame_length) != 0) {
+  if (fvad_ValidRateAndFrameLength(fs, frame_length) != 0) {
     return -1;
   }
 
@@ -103,7 +99,7 @@ int WebRtcVad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
   return vad;
 }
 
-int WebRtcVad_ValidRateAndFrameLength(int rate, int frame_length) {
+int fvad_ValidRateAndFrameLength(int rate, int frame_length) {
   int return_value = -1;
   size_t i;
   int valid_length_ms;

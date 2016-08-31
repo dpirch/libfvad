@@ -14,8 +14,7 @@
 #ifndef WEBRTC_COMMON_AUDIO_VAD_VAD_SP_H_
 #define WEBRTC_COMMON_AUDIO_VAD_VAD_SP_H_
 
-#include "webrtc/common_audio/vad/vad_core.h"
-#include "webrtc/typedefs.h"
+#include "vad_core.h"
 
 // Downsamples the signal by a factor 2, eg. 32->16 or 16->8.
 //

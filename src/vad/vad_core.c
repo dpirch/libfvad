@@ -8,13 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "webrtc/common_audio/vad/vad_core.h"
-
-#include "webrtc/common_audio/signal_processing/include/signal_processing_library.h"
-#include "webrtc/common_audio/vad/vad_filterbank.h"
-#include "webrtc/common_audio/vad/vad_gmm.h"
-#include "webrtc/common_audio/vad/vad_sp.h"
-#include "webrtc/typedefs.h"
+#include "vad_core.h"
+#include "vad_filterbank.h"
+#include "vad_gmm.h"
+#include "vad_sp.h"
 
 // Spectrum Weighting
 static const int16_t kSpectrumWeight[kNumChannels] = { 6, 8, 10, 12, 14, 16 };

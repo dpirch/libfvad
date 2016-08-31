@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ ! "$(dirname "$0")" -ef . ]; then
+    echo "$0: Must be run from the project's root directory."
+    exit 1
+fi
+
+echo "$0: Running autoreconf..."
+autoreconf -i || exit $?
+
+echo "$0: Done. Now you can run './configure'."
