@@ -10,6 +10,7 @@ webrtc/common_audio/signal_processing/get_scaling_square.c
 webrtc/common_audio/signal_processing/resample_48khz.c
 webrtc/common_audio/signal_processing/resample_by_2_internal.c
 webrtc/common_audio/signal_processing/resample_by_2_internal.h
+webrtc/common_audio/signal_processing/resample_fractional.c
 webrtc/common_audio/signal_processing/signal_processing_unittest.cc
 webrtc/common_audio/signal_processing/spl_inl.c
 
