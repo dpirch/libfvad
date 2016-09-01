@@ -45,7 +45,7 @@ void fvad_Free(VadInst* handle) {
 }
 
 // TODO(bjornv): Move WebRtcVad_InitCore() code here.
-int WebRtcVad_Init(VadInst* handle) {
+int fvad_Init(VadInst* handle) {
   // Initialize the core VAD component.
   return WebRtcVad_InitCore((VadInstT*) handle);
 }
