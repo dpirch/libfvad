@@ -15,5 +15,5 @@ LT_INIT([disable-static pic-only])
 
 ### output ###
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([Makefile src/Makefile libfvad.pc])
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile libfvad.pc])
 AC_OUTPUT

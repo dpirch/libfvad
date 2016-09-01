@@ -36,6 +36,9 @@
 #define WEBRTC_SPL_ABS_W32(a) \
     (((int32_t)a >= 0) ? ((int32_t)a) : -((int32_t)a))
 
+ // libfvad: removed because not needed;
+ // we would have to configure WEBRTC_ARCH_LITTLE_ENDIAN
+#if 0
 #ifdef WEBRTC_ARCH_LITTLE_ENDIAN
 #define WEBRTC_SPL_GET_BYTE(a, nr)  (((int8_t *)a)[nr])
 #define WEBRTC_SPL_SET_BYTE(d_ptr, val, index) \
@@ -48,6 +51,7 @@
     ((((int16_t *)d_ptr)[index >> 1]) \
     & (0x00ff << (8 * ((index) & 0x1)))) | (val << (8 * ((index + 1) & 0x1)))
 #endif
+#endif // 0
 
 #define WEBRTC_SPL_MUL(a, b) \
     ((int32_t) ((int32_t)(a) * (int32_t)(b)))
@@ -150,7 +154,9 @@ extern "C" {
 // code will be assigned.
 // Note that this function MUST be called in any application that uses SPL
 // functions.
-void WebRtcSpl_Init();
+// libfvad: WebRtcSpl_Init has been removed, the following empty function
+// is for compatibility
+static inline void WebRtcSpl_Init() {}
 
 // Get SPL Version
 int16_t WebRtcSpl_get_version(char* version, int16_t length_in_bytes);
