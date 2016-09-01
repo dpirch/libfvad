@@ -8,6 +8,7 @@ libfvad_int_la_SOURCES = \
 	signal_processing/resample_48khz.c \
 	signal_processing/resample_by_2_internal.h \
 	signal_processing/resample_by_2_internal.c \
+	signal_processing/resample_fractional.c \
 	signal_processing/signal_processing_library.h \
 	signal_processing/spl_inl.h \
 	vad/vad_core.h \
