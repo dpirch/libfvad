@@ -8,22 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <stdlib.h>
+#include "vad_unittest.h"
+#include "../src/vad/vad_sp.h"
 
-#include "testing/gtest/include/gtest/gtest.h"
-#include "webrtc/common_audio/vad/vad_unittest.h"
-#include "webrtc/typedefs.h"
 
-extern "C" {
-#include "webrtc/common_audio/vad/vad_core.h"
-#include "webrtc/common_audio/vad/vad_sp.h"
-}
-
-namespace {
-
-TEST_F(VadTest, vad_sp) {
-  VadInstT* self = reinterpret_cast<VadInstT*>(malloc(sizeof(VadInstT)));
-  const int kMaxFrameLenSp = 960;  // Maximum frame length in this unittest.
+void test_main() {
+  VadInstT* self = malloc(sizeof(VadInstT));
+  #define kMaxFrameLenSp 960  // Maximum frame length in this unittest.
   int16_t zeros[kMaxFrameLenSp] = { 0 };
   int32_t state[2] = { 0 };
   int16_t data_in[kMaxFrameLenSp];
@@ -71,4 +62,3 @@ TEST_F(VadTest, vad_sp) {
 
   free(self);
 }
-}  // namespace

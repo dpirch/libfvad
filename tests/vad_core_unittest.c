@@ -8,21 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <stdlib.h>
+#include "vad_unittest.h"
+#include "../src/vad/vad_core.h"
 
-#include "testing/gtest/include/gtest/gtest.h"
-#include "webrtc/common_audio/vad/vad_unittest.h"
-#include "webrtc/typedefs.h"
-
-extern "C" {
-#include "webrtc/common_audio/vad/vad_core.h"
-}
-
-namespace {
-
-TEST_F(VadTest, InitCore) {
+#ifdef TEST_VAD_CORE_INIT
+void test_main() {
   // Test WebRtcVad_InitCore().
-  VadInstT* self = reinterpret_cast<VadInstT*>(malloc(sizeof(VadInstT)));
+  VadInstT* self = malloc(sizeof(VadInstT));
 
   // NULL pointer test.
   EXPECT_EQ(-1, WebRtcVad_InitCore(NULL));
@@ -34,9 +26,12 @@ TEST_F(VadTest, InitCore) {
 
   free(self);
 }
+#endif // TEST_VAD_CORE_INIT
 
-TEST_F(VadTest, set_mode_core) {
-  VadInstT* self = reinterpret_cast<VadInstT*>(malloc(sizeof(VadInstT)));
+
+#ifdef TEST_VAD_CORE_SET_MODE
+void test_main() {
+  VadInstT* self = malloc(sizeof(VadInstT));
 
   // TODO(bjornv): Add NULL pointer check if we take care of it in
   // vad_core.c
@@ -53,9 +48,12 @@ TEST_F(VadTest, set_mode_core) {
 
   free(self);
 }
+#endif // TEST_VAD_CORE_SET_MODE
 
-TEST_F(VadTest, CalcVad) {
-  VadInstT* self = reinterpret_cast<VadInstT*>(malloc(sizeof(VadInstT)));
+
+#ifdef TEST_VAD_CORE_CALC_VAD
+void test_main() {
+  VadInstT* self = malloc(sizeof(VadInstT));
   int16_t speech[kMaxFrameLength];
 
   // TODO(bjornv): Add NULL pointer check if we take care of it in
@@ -102,4 +100,4 @@ TEST_F(VadTest, CalcVad) {
 
   free(self);
 }
-}  // namespace
+#endif // TEST_VAD_CORE_CALC_VAD
