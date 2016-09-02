@@ -10,6 +10,7 @@
 
 #include "vad_unittest.h"
 #include "../src/vad/vad_core.h"
+#include <string.h>
 
 #ifdef TEST_VAD_CORE_INIT
 void test_main() {

@@ -12,6 +12,7 @@
 #include "vad_filterbank.h"
 #include "vad_gmm.h"
 #include "vad_sp.h"
+#include <string.h>
 
 // Spectrum Weighting
 static const int16_t kSpectrumWeight[kNumChannels] = { 6, 8, 10, 12, 14, 16 };

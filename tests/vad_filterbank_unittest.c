@@ -10,6 +10,7 @@
 
 #include "vad_unittest.h"
 #include "../src/vad/vad_filterbank.h"
+#include <string.h>
 
 
 #define kNumValidFrameLengths 3

@@ -15,74 +15,7 @@
 #ifndef WEBRTC_SPL_SPL_INL_H_
 #define WEBRTC_SPL_SPL_INL_H_
 
-#if 0 // #ifdef WEBRTC_ARCH_ARM_V7
-#include "webrtc/common_audio/signal_processing/include/spl_inl_armv7.h"
-#else
 
-#if 0 // #if defined(MIPS32_LE)
-#include "webrtc/common_audio/signal_processing/include/spl_inl_mips.h"
-#endif
-
-#if 1 // #if !defined(MIPS_DSP_R1_LE)
-static __inline int16_t WebRtcSpl_SatW32ToW16(int32_t value32) {
-  int16_t out16 = (int16_t) value32;
-
-  if (value32 > 32767)
-    out16 = 32767;
-  else if (value32 < -32768)
-    out16 = -32768;
-
-  return out16;
-}
-
-static __inline int32_t WebRtcSpl_AddSatW32(int32_t l_var1, int32_t l_var2) {
-  int32_t l_sum;
-
-  // Perform long addition
-  l_sum = l_var1 + l_var2;
-
-  if (l_var1 < 0) {  // Check for underflow.
-    if ((l_var2 < 0) && (l_sum >= 0)) {
-        l_sum = (int32_t)0x80000000;
-    }
-  } else {  // Check for overflow.
-    if ((l_var2 > 0) && (l_sum < 0)) {
-        l_sum = (int32_t)0x7FFFFFFF;
-    }
-  }
-
-  return l_sum;
-}
-
-static __inline int32_t WebRtcSpl_SubSatW32(int32_t l_var1, int32_t l_var2) {
-  int32_t l_diff;
-
-  // Perform subtraction.
-  l_diff = l_var1 - l_var2;
-
-  if (l_var1 < 0) {  // Check for underflow.
-    if ((l_var2 > 0) && (l_diff > 0)) {
-      l_diff = (int32_t)0x80000000;
-    }
-  } else {  // Check for overflow.
-    if ((l_var2 < 0) && (l_diff < 0)) {
-      l_diff = (int32_t)0x7FFFFFFF;
-    }
-  }
-
-  return l_diff;
-}
-
-static __inline int16_t WebRtcSpl_AddSatW16(int16_t a, int16_t b) {
-  return WebRtcSpl_SatW32ToW16((int32_t) a + (int32_t) b);
-}
-
-static __inline int16_t WebRtcSpl_SubSatW16(int16_t var1, int16_t var2) {
-  return WebRtcSpl_SatW32ToW16((int32_t) var1 - (int32_t) var2);
-}
-#endif  // #if !defined(MIPS_DSP_R1_LE)
-
-#if 1 // #if !defined(MIPS32_LE)
 static __inline int16_t WebRtcSpl_GetSizeInBits(uint32_t n) {
   int16_t bits;
 
@@ -141,33 +74,5 @@ static __inline int16_t WebRtcSpl_NormU32(uint32_t a) {
   return zeros;
 }
 
-static __inline int16_t WebRtcSpl_NormW16(int16_t a) {
-  int16_t zeros;
-
-  if (a == 0) {
-    return 0;
-  }
-  else if (a < 0) {
-    a = ~a;
-  }
-
-  if (!(0xFF80 & a)) {
-    zeros = 8;
-  } else {
-    zeros = 0;
-  }
-  if (!(0xF800 & (a << zeros))) zeros += 4;
-  if (!(0xE000 & (a << zeros))) zeros += 2;
-  if (!(0xC000 & (a << zeros))) zeros += 1;
-
-  return zeros;
-}
-
-static __inline int32_t WebRtc_MulAccumW16(int16_t a, int16_t b, int32_t c) {
-  return (a * b + c);
-}
-#endif  // #if !defined(MIPS32_LE)
-
-#endif  // WEBRTC_ARCH_ARM_V7
 
 #endif  // WEBRTC_SPL_SPL_INL_H_
