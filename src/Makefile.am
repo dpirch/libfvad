@@ -11,6 +11,7 @@ libfvad_int_la_SOURCES = \
 	signal_processing/resample_fractional.c \
 	signal_processing/signal_processing_library.h \
 	signal_processing/spl_inl.h \
+	signal_processing/spl_inl.c \
 	vad/vad_core.h \
 	vad/vad_core.c \
 	vad/vad_filterbank.h \

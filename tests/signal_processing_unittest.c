@@ -47,6 +47,22 @@ void test_main() {
 #endif // TEST_SPL_INLINE
 
 
+#ifdef TEST_SPL_LEADING_ZEROS
+void test_main() {
+  EXPECT_EQ(32, WebRtcSpl_CountLeadingZeros32(0));
+  EXPECT_EQ(32, WebRtcSpl_CountLeadingZeros32_NotBuiltin(0));
+  for (int i = 0; i < 32; ++i) {
+    const uint32_t single_one = (uint32_t)1 << i;
+    const uint32_t all_ones = 2 * single_one - 1;
+    EXPECT_EQ(31 - i, WebRtcSpl_CountLeadingZeros32(single_one));
+    EXPECT_EQ(31 - i, WebRtcSpl_CountLeadingZeros32_NotBuiltin(single_one));
+    EXPECT_EQ(31 - i, WebRtcSpl_CountLeadingZeros32(all_ones));
+    EXPECT_EQ(31 - i, WebRtcSpl_CountLeadingZeros32_NotBuiltin(all_ones));
+  }
+}
+#endif // TEST_SPL_LEADING_ZEROS
+
+
 #ifdef TEST_SPL_MATH_OPERATIONS
 void test_main() {
 
