@@ -1,6 +1,6 @@
 
 check_LTLIBRARIES = libtest.la
-libtest_la_SOURCES = test.h test.c
+libtest_la_SOURCES = test_common.h test_common.c
 libtest_la_LIBADD = ../src/libfvad_int.la
 
 noinst_HEADERS = vad_unittest.h

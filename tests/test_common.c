@@ -1,4 +1,4 @@
-#include "test.h"
+#include "test_common.h"
 #include <stdio.h>
 
 void assert_fail(const char *s, const char *file, int line)

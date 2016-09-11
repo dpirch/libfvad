@@ -11,7 +11,7 @@
 #ifndef WEBRTC_COMMON_AUDIO_VAD_VAD_UNITTEST_H
 #define WEBRTC_COMMON_AUDIO_VAD_VAD_UNITTEST_H
 
-#include "test.h"
+#include "test_common.h"
 
 // Modes we support
 static const int kModes[] = { 0, 1, 2, 3 };

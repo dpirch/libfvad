@@ -9,7 +9,7 @@
  */
 
 #include "../src/signal_processing/signal_processing_library.h"
-#include "test.h"
+#include "test_common.h"
 #include <string.h>
 
 

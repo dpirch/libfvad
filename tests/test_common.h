@@ -1,3 +1,6 @@
+#ifndef TEST_COMMON_H_
+#define TEST_COMMON_H_
+
 #include "../src/common.h"
 
 #define ASSERT_TRUE(cond) ((cond) ? (void)0 : assert_fail(#cond, __FILE__, __LINE__))
@@ -9,3 +12,4 @@
 void assert_fail(const char *s, const char *file, int line);
 void expect_fail(const char *s, const char *file, int line);
 
+#endif // TEST_COMMON_H_
