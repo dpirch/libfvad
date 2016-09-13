@@ -34,5 +34,9 @@ webrtc/common_audio/vad/webrtc_vad.c
 
 AUTHORS
 webrtc/LICENSE
-webrtc/LICENSE_THIRD_PARTY
 webrtc/PATENTS
+
+data/voice_engine/audio_tiny8.wav
+data/voice_engine/audio_tiny16.wav
+data/voice_engine/audio_tiny32.wav
+data/voice_engine/audio_tiny48.wav
