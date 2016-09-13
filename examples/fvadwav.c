@@ -14,8 +14,9 @@ static bool process_sf(SNDFILE *infile, int samplerate, VadInst *vad,
     bool success = false;
     double *buf0 = NULL;
     int16_t *buf1 = NULL;
-    int vadres;
-    long frames_total = 0, frames_voice = 0;
+    int vadres, prev = -1;
+    long frames[2] = {0, 0};
+    long segments[2] = {0, 0};
 
     if (framelen > SIZE_MAX / sizeof (double)
             || !(buf0 = malloc(framelen * sizeof *buf0))
@@ -36,22 +37,29 @@ static bool process_sf(SNDFILE *infile, int samplerate, VadInst *vad,
             goto end;
         }
 
-        if (outfiles[!!vadres]) {
-            sf_write_double(outfiles[!!vadres], buf0, framelen);
-        }
-
         if (listfile) {
             fprintf(listfile, "%d\n", vadres);
         }
 
-        frames_voice += !!vadres;
-        frames_total++;
+        vadres = !!vadres; // make sure it is 0 or 1
 
+        if (outfiles[vadres]) {
+            sf_write_double(outfiles[!!vadres], buf0, framelen);
+        }
+
+        frames[vadres]++;
+        if (prev != vadres) segments[vadres]++;
+        prev = vadres;
     }
 
-    fprintf(stderr, "voice detected in %ld of %ld frames (%.2f%%)\n",
-        frames_voice, frames_total,
-        100.0 * (frames_total ? (double)frames_voice / frames_total : 1));
+    printf("voice detected in %ld of %ld frames (%.2f%%)\n",
+        frames[1], frames[0] + frames[1],
+        frames[0] + frames[1] ?
+            100.0 * ((double)frames[1] / (frames[0] + frames[1])) : 0.0);
+    printf("%ld voice segments, average length %.2f frames\n",
+        segments[1], segments[1] ? (double)frames[1] / segments[1] : 0.0);
+    printf("%ld non-voice segments, average length %.2f frames\n",
+        segments[0], segments[0] ? (double)frames[0] / segments[0] : 0.0);
 
     success = true;
 

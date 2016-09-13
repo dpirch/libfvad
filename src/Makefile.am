@@ -20,7 +20,8 @@ libfvad_int_la_SOURCES = \
 	vad/vad_gmm.c \
 	vad/vad_sp.h \
 	vad/vad_sp.c \
-	fvad.c
+	fvad.c \
+	common.h
 
 # main public libary
 lib_LTLIBRARIES = libfvad.la

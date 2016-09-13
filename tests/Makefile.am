@@ -22,8 +22,9 @@ check_PROGRAMS = \
 	vad_valid_rates
 
 
-
-TESTS = $(check_PROGRAMS)
+TESTS = $(check_PROGRAMS) wavtest.sh
+CLEANFILES = wavtest.result
+EXTRA_DIST = data wavtest.sh
 
 LDADD = libtest.la
 
