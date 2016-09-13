@@ -1,4 +1,8 @@
-SUBDIRS = . src tests
+if BUILD_EXAMPLES
+  examples_dir = examples
+endif
+
+SUBDIRS = src $(examples_dir) tests
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = bootstrap
 
