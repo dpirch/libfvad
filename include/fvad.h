@@ -1,5 +1,6 @@
 /*
  *  Copyright (c) 2012 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2016 Daniel Pirch.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,78 +9,81 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-
-/*
- * This header file includes the VAD API calls. Specific function calls are given below.
- */
-
-#ifndef WEBRTC_COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_  // NOLINT
-#define WEBRTC_COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_
+#ifndef FVAD_H_
+#define FVAD_H_
 
 #include <stdint.h>
 #include <stddef.h>
 
-typedef struct WebRtcVadInst VadInst;
+/*
+ * Type for a VAD instance, an opaque object created using fvad_create().
+ */
+typedef struct Fvad Fvad;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-// Creates an instance to the VAD structure.
-VadInst* fvad_Create();
+/*
+ * Creates and initializes a VAD instance.
+ *
+ * On success, returns a pointer to the new VAD instance, which should
+ * eventually be deleted using fvad_destroy().
+ *
+ * Returns NULL in case of a memory allocation error.
+ */
+Fvad *fvad_create();
 
-// Frees the dynamic memory of a specified VAD instance.
-//
-// - handle [i] : Pointer to VAD instance that should be freed.
-void fvad_Free(VadInst* handle);
+/*
+ * Frees the dynamic memory of a specified VAD instance.
+ */
+void fvad_destroy(Fvad *inst);
 
-// Initializes a VAD instance.
-//
-// - handle [i/o] : Instance that should be initialized.
-//
-// returns        : 0 - (OK),
-//                 -1 - (NULL pointer or Default mode could not be set).
-int fvad_Init(VadInst* handle);
 
-// Sets the VAD operating mode. A more aggressive (higher mode) VAD is more
-// restrictive in reporting speech. Put in other words the probability of being
-// speech when the VAD returns 1 is increased with increasing mode. As a
-// consequence also the missed detection rate goes up.
-//
-// - handle [i/o] : VAD instance.
-// - mode   [i]   : Aggressiveness mode (0, 1, 2, or 3).
-//
-// returns        : 0 - (OK),
-//                 -1 - (NULL pointer, mode could not be set or the VAD instance
-//                       has not been initialized).
-int fvad_set_mode(VadInst* handle, int mode);
+/*
+ * Reinitializes a VAD instance, clearing all state and resetting mode and
+ * sample rate to defaults.
+ */
+void fvad_reset(Fvad *inst);
 
-// Calculates a VAD decision for the |audio_frame|. For valid sampling rates
-// frame lengths, see the description of WebRtcVad_ValidRatesAndFrameLengths().
-//
-// - handle       [i/o] : VAD Instance. Needs to be initialized by
-//                        WebRtcVad_Init() before call.
-// - fs           [i]   : Sampling frequency (Hz): 8000, 16000, or 32000
-// - audio_frame  [i]   : Audio frame buffer.
-// - frame_length [i]   : Length of audio frame buffer in number of samples.
-//
-// returns              : 1 - (Active Voice),
-//                        0 - (Non-active Voice),
-//                       -1 - (Error)
-int fvad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
-                      size_t frame_length);
 
-// Checks for valid combinations of |rate| and |frame_length|. We support 10,
-// 20 and 30 ms frames and the rates 8000, 16000 and 32000 Hz.
-//
-// - rate         [i] : Sampling frequency (Hz).
-// - frame_length [i] : Speech frame buffer length in number of samples.
-//
-// returns            : 0 - (valid combination), -1 - (invalid combination)
-int fvad_ValidRateAndFrameLength(int rate, size_t frame_length);
+/*
+ * Changes the VAD operating ("aggressiveness") mode of a VAD instance.
+ *
+ * A more aggressive (higher mode) VAD is more restrictive in reporting speech.
+ * Put in other words the probability of being speech when the VAD returns 1 is
+ * increased with increasing mode. As a consequence also the missed detection
+ * rate goes up.
+ *
+ * Valid modes are 0 ("quality"), 1 ("low bitrate"), 2 ("aggressive"), and 3
+ * ("very aggressive"). The default mode is 0.
+ *
+ * Returns 0 on success, or -1 if the specified mode is invalid.
+ */
+int fvad_set_mode(Fvad* inst, int mode);
 
-#ifdef __cplusplus
-}
-#endif
 
-#endif  // WEBRTC_COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_  // NOLINT
+/*
+ * Sets the input sample rate in Hz for a VAD instance.
+ *
+ * Valid values are 8000, 16000, 32000 and 48000. The default is 8000. Note
+ * that internally all processing will be done 8000 Hz; input data in higher
+ * sample rates will just we downsampled first.
+ *
+ * Returns 0 on success, or -1 if the passed value is invalid.
+ */
+int fvad_set_sample_rate(Fvad* inst, int sample_rate);
+
+
+/*
+ * Calculates a VAD decision for an audio frame.
+ *
+ * `frame` is an array of `length` signed 16-bit samples. Only frames with a
+ * length of 10, 20 or 30 ms are supported, so for example at 8 kHz, `length`
+ * must be either 80, 160 or 240.
+ *
+ * Returns              : 1 - (active voice),
+ *                        0 - (non-active Voice),
+ *                       -1 - (invalid frame length).
+ */
+int fvad_process(Fvad* inst, const int16_t* frame, size_t length);
+
+
+#endif  // FVAD_H_

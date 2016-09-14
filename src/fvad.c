@@ -1,5 +1,6 @@
 /*
  *  Copyright (c) 2012 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2016 Daniel Pirch.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -13,99 +14,94 @@
 #include <stdlib.h>
 #include "vad/vad_core.h"
 
-static const int kInitCheck = 42;
-static const int kValidRates[] = { 8000, 16000, 32000, 48000 };
-static const size_t kRatesSize = sizeof(kValidRates) / sizeof(*kValidRates);
-static const int kMaxFrameLengthMs = 30;
+// valid sample rates in kHz
+static const int valid_rates[] = { 8, 16, 32, 48 };
 
-VadInst* fvad_Create() {
-  VadInstT* self = (VadInstT*)malloc(sizeof(VadInstT));
+// VAD process functions for each valid sample rate
+static int (*const process_funcs[])(VadInstT*, const int16_t*, size_t) = {
+    WebRtcVad_CalcVad8khz,
+    WebRtcVad_CalcVad16khz,
+    WebRtcVad_CalcVad32khz,
+    WebRtcVad_CalcVad48khz,
+};
 
-  self->init_flag = 0;
+// valid frame lengths in ms
+static const int valid_frame_times[] = { 10, 20, 30 };
 
-  return (VadInst*)self;
+
+struct Fvad {
+    VadInstT core;
+    int rate_idx; // index in valid_rates and process_funcs arrays
+};
+
+
+Fvad *fvad_create()
+{
+    Fvad *inst = malloc(sizeof *inst);
+    if (inst) fvad_reset(inst);
+    return inst;
 }
 
-void fvad_Free(VadInst* handle) {
-  free(handle);
+
+void fvad_destroy(Fvad *inst)
+{
+    assert(inst);
+    free(inst);
 }
 
-// TODO(bjornv): Move WebRtcVad_InitCore() code here.
-int fvad_Init(VadInst* handle) {
-  // Initialize the core VAD component.
-  return WebRtcVad_InitCore((VadInstT*) handle);
+
+void fvad_reset(Fvad *inst)
+{
+    assert(inst);
+
+    int rv = WebRtcVad_InitCore(&inst->core);
+    assert(rv == 0);
+    inst->rate_idx = 0;
 }
 
-// TODO(bjornv): Move WebRtcVad_set_mode_core() code here.
-int fvad_set_mode(VadInst* handle, int mode) {
-  VadInstT* self = (VadInstT*) handle;
 
-  if (handle == NULL) {
-    return -1;
-  }
-  if (self->init_flag != kInitCheck) {
-    return -1;
-  }
-
-  return WebRtcVad_set_mode_core(self, mode);
+int fvad_set_mode(Fvad* inst, int mode)
+{
+    assert(inst);
+    int rv = WebRtcVad_set_mode_core(&inst->core, mode);
+    assert(rv == 0 || rv == -1);
+    return rv;
 }
 
-int fvad_Process(VadInst* handle, int fs, const int16_t* audio_frame,
-                      size_t frame_length) {
-  int vad = -1;
-  VadInstT* self = (VadInstT*) handle;
 
-  if (handle == NULL) {
-    return -1;
-  }
-
-  if (self->init_flag != kInitCheck) {
-    return -1;
-  }
-  if (audio_frame == NULL) {
-    return -1;
-  }
-  if (fvad_ValidRateAndFrameLength(fs, frame_length) != 0) {
-    return -1;
-  }
-
-  if (fs == 48000) {
-      vad = WebRtcVad_CalcVad48khz(self, audio_frame, frame_length);
-  } else if (fs == 32000) {
-    vad = WebRtcVad_CalcVad32khz(self, audio_frame, frame_length);
-  } else if (fs == 16000) {
-    vad = WebRtcVad_CalcVad16khz(self, audio_frame, frame_length);
-  } else if (fs == 8000) {
-    vad = WebRtcVad_CalcVad8khz(self, audio_frame, frame_length);
-  }
-
-  if (vad > 0) {
-    vad = 1;
-  }
-  return vad;
-}
-
-int fvad_ValidRateAndFrameLength(int rate, size_t frame_length) {
-  int return_value = -1;
-  size_t i;
-  int valid_length_ms;
-  size_t valid_length;
-
-  // We only allow 10, 20 or 30 ms frames. Loop through valid frame rates and
-  // see if we have a matching pair.
-  for (i = 0; i < kRatesSize; i++) {
-    if (kValidRates[i] == rate) {
-      for (valid_length_ms = 10; valid_length_ms <= kMaxFrameLengthMs;
-          valid_length_ms += 10) {
-        valid_length = (size_t)(kValidRates[i] / 1000 * valid_length_ms);
-        if (frame_length == valid_length) {
-          return_value = 0;
-          break;
+int fvad_set_sample_rate(Fvad* inst, int sample_rate)
+{
+    assert(inst);
+    for (int i = 0; i < arraysize(valid_rates); i++) {
+        if (valid_rates[i] * 1000 == sample_rate) {
+            inst->rate_idx = i;
+            return 0;
         }
-      }
-      break;
     }
-  }
+    return -1;
+}
 
-  return return_value;
+
+static bool valid_length(int rate_idx, size_t length)
+{
+    int samples_per_ms = valid_rates[rate_idx];
+    for (int i = 0; i < arraysize(valid_frame_times); i++) {
+        if (valid_frame_times[i] * samples_per_ms == length)
+            return true;
+    }
+    return false;
+}
+
+
+int fvad_process(Fvad* inst, const int16_t* frame, size_t length)
+{
+    assert(inst);
+    if (!valid_length(inst->rate_idx, length))
+        return -1;
+
+    int rv = process_funcs[inst->rate_idx](&inst->core, frame, length);
+    assert (rv >= 0);
+    if (rv > 0) rv = 1;
+
+    return rv;
 }
