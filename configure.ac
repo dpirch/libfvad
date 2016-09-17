@@ -1,4 +1,4 @@
-AC_INIT([libfvad],[1.0],[dpirch@gmail.com],[],[http://example.com/TODO])
+AC_INIT([libfvad],[1.0],[dpirch@gmail.com],[],[https://github.com/dpirch/libfvad])
 AC_CONFIG_SRCDIR([src/fvad.c])
 AC_CONFIG_AUX_DIR([ac-aux])
 AC_CONFIG_MACRO_DIR([m4])

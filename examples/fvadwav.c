@@ -1,4 +1,14 @@
-#define _POSIX_C_SOURCE 200809L
+/*
+ * Copyright (c) 2016 Daniel Pirch
+ *
+ * Use of this source code is governed by a BSD-style license
+ * that can be found in the LICENSE file in the root of the source
+ * tree. An additional intellectual property rights grant can be found
+ * in the file PATENTS.  All contributing project authors may
+ * be found in the AUTHORS file in the root of the source tree.
+ */
+
+ #define _POSIX_C_SOURCE 200809L
 
 #include <fvad.h>
 #include <stdlib.h>

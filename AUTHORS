@@ -1,6 +1,14 @@
 ﻿# Names should be added to this file like so:
 # Name or Organization <email address>
 
+#
+# Author of libfvad:
+#
+Daniel Pirch <dpirch@gmail.com>
+
+#
+# Authors of the WebRTC Native Code which libfvad was forked from:
+#
 Alexander Brauckmann <a.brauckmann@gmail.com>
 Andrew MacDonald <andrew@webrtc.org>
 Anil Kumar <an1kumar@gmail.com>
