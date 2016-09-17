@@ -1,4 +1,6 @@
 # libfvad: voice activity detection (VAD) library #
+[![Build Status](https://travis-ci.org/dpirch/libfvad.svg?branch=master)](https://travis-ci.org/dpirch/libfvad)
+
 This is a fork of the VAD engine that is part of the WebRTC Native Code package
 (https://webrtc.org/native-code/), for use as a standalone library independent
 from the rest of the WebRTC code. There are currently no changes in

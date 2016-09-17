@@ -1,0 +1,13 @@
+language: c
+
+sudo: required
+dist: trusty
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install libsndfile1-dev
+
+script:
+  - ./bootstrap
+  - ./configure
+  - make DISTCHECK_CONFIGURE_FLAGS='--enable-examples' distcheck
