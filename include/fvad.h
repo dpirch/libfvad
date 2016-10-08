@@ -16,7 +16,7 @@
 #include <stddef.h>
 
 /*
- * Type for a VAD instance, an opaque object created using fvad_create().
+ * Type for a VAD instance, an opaque object created using fvad_new().
  */
 typedef struct Fvad Fvad;
 
@@ -25,16 +25,16 @@ typedef struct Fvad Fvad;
  * Creates and initializes a VAD instance.
  *
  * On success, returns a pointer to the new VAD instance, which should
- * eventually be deleted using fvad_destroy().
+ * eventually be deleted using fvad_free().
  *
  * Returns NULL in case of a memory allocation error.
  */
-Fvad *fvad_create();
+Fvad *fvad_new();
 
 /*
  * Frees the dynamic memory of a specified VAD instance.
  */
-void fvad_destroy(Fvad *inst);
+void fvad_free(Fvad *inst);
 
 
 /*

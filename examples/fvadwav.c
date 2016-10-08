@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     /*
      * create fvad instance
      */
-    vad = fvad_create();
+    vad = fvad_new();
     if (!vad) {
         fprintf(stderr, "out of memory\n");
         goto fail;
@@ -243,7 +243,7 @@ end:
     for (int i = 0; i < 2; i++)
         if (out_sf[i]) sf_close(out_sf[i]);
     if (list_file) fclose(list_file);
-    if (vad) fvad_destroy(vad);
+    if (vad) fvad_free(vad);
 
     return retval;
 }
