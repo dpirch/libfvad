@@ -23,6 +23,16 @@
 #define RTC_DCHECK_LT(a,b) assert((a) < (b))
 #define RTC_DCHECK_LE(a,b) assert((a) <= (b))
 
+// from webrtc/base/sanitizer.h
+#ifdef __has_attribute
+#if __has_attribute(no_sanitize)
+#define RTC_NO_SANITIZE(what) __attribute__((no_sanitize(what)))
+#endif
+#endif
+#ifndef RTC_NO_SANITIZE
+#define RTC_NO_SANITIZE(what)
+#endif
+
 #define arraysize(a) (sizeof (a) / sizeof *(a))
 
 
