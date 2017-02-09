@@ -65,7 +65,7 @@ int fvad_set_mode(Fvad* inst, int mode);
  *
  * Valid values are 8000, 16000, 32000 and 48000. The default is 8000. Note
  * that internally all processing will be done 8000 Hz; input data in higher
- * sample rates will just we downsampled first.
+ * sample rates will just be downsampled first.
  *
  * Returns 0 on success, or -1 if the passed value is invalid.
  */
