@@ -39,4 +39,7 @@ webrtc/PATENTS
 data/voice_engine/audio_tiny8.wav
 data/voice_engine/audio_tiny16.wav
 data/voice_engine/audio_tiny32.wav
+
+# this has apparently been removed from the webrtc repository, but we will keep
+# the file for libfvad because we need it for a test:
 data/voice_engine/audio_tiny48.wav
