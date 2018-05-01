@@ -14,18 +14,17 @@ make
 sudo make install
 ```
 
-When building from the cloned git repository (instead of a downloaded release),
-run `autoreconf -i` to create the missing *configure* script.
-
-An optional example can be enabled enabled by `./configure --enable-examples`.
-This requires libsndfile (http://www.mega-nerd.com/libsndfile/, e.g.
-`apt install libsndfile1-dev`).
+ - When building from the cloned git repository (instead of a downloaded release),
+   run `autoreconf -i` to create the missing *configure* script.
+ - An optional example can be enabled enabled by `./configure --enable-examples`.
+   This requires libsndfile (http://www.mega-nerd.com/libsndfile/, e.g.
+   `apt install libsndfile1-dev`).
 
 ## Usage ##
 The API is documented in the `include/fvad.h` header file. See also
 `examples/fvadwav.h`.
 
-## Development Notes ##
+## Development notes ##
 Recommended CFLAGS to turn on warnings: `-std=c11 -Wall -Wextra -Wpedantic`.
 Tests can be run with `make check`.
 
