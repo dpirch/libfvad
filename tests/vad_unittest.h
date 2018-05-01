@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef WEBRTC_COMMON_AUDIO_VAD_VAD_UNITTEST_H
-#define WEBRTC_COMMON_AUDIO_VAD_VAD_UNITTEST_H
+#ifndef COMMON_AUDIO_VAD_VAD_UNITTEST_H_
+#define COMMON_AUDIO_VAD_VAD_UNITTEST_H_
 
 #include "test_common.h"
 
@@ -32,4 +32,4 @@ static const size_t kFrameLengthsSize = sizeof(kFrameLengths) / sizeof(*kFrameLe
   // Returns true if the rate and frame length combination is valid.
   bool ValidRatesAndFrameLengths(int rate, size_t frame_length);
 
-#endif  // WEBRTC_COMMON_AUDIO_VAD_VAD_UNITTEST_H
+#endif  // COMMON_AUDIO_VAD_VAD_UNITTEST_H_

@@ -15,8 +15,8 @@
  * For specific function calls, see bottom of file.
  */
 
-#ifndef WEBRTC_SPL_SIGNAL_PROCESSING_LIBRARY_H_
-#define WEBRTC_SPL_SIGNAL_PROCESSING_LIBRARY_H_
+#ifndef COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_
+#define COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_
 
 #include "../common.h"
 
@@ -90,89 +90,4 @@ void WebRtcSpl_ResetResample48khzTo8khz(WebRtcSpl_State48khzTo8khz* state);
  ************************************************************/
 
 
-#endif  // WEBRTC_SPL_SIGNAL_PROCESSING_LIBRARY_H_
-
-//
-// WebRtcSpl_GetSizeInBits(...)
-//
-// Returns the # of bits that are needed at the most to represent the number
-// specified by the |value| parameter.
-//
-// Input:
-//      - value     : Input value
-//
-// Return value     : Number of bits needed to represent |value|
-//
-
-//
-// WebRtcSpl_NormW32(...)
-//
-// Norm returns the # of left shifts required to 32-bit normalize the 32-bit
-// signed number specified by the |value| parameter.
-//
-// Input:
-//      - value     : Input value
-//
-// Return value     : Number of bit shifts needed to 32-bit normalize |value|
-//
-
-//
-// WebRtcSpl_NormU32(...)
-//
-// Norm returns the # of left shifts required to 32-bit normalize the unsigned
-// 32-bit number specified by the |value| parameter.
-//
-// Input:
-//      - value     : Input value
-//
-// Return value     : Number of bit shifts needed to 32-bit normalize |value|
-//
-
-//
-// WebRtcSpl_GetScalingSquare(...)
-//
-// Returns the # of bits required to scale the samples specified in the
-// |in_vector| parameter so that, if the squares of the samples are added the
-// # of times specified by the |times| parameter, the 32-bit addition will not
-// overflow (result in int32_t).
-//
-// Input:
-//      - in_vector         : Input vector to check scaling on
-//      - in_vector_length  : Samples in |in_vector|
-//      - times             : Number of additions to be performed
-//
-// Return value             : Number of right bit shifts needed to avoid
-//                            overflow in the addition calculation
-//
-
-//
-// WebRtcSpl_DivW32W16(...)
-//
-// Divides a int32_t |num| by a int16_t |den|.
-//
-// If |den|==0, (int32_t)0x7FFFFFFF is returned.
-//
-// Input:
-//      - num       : Numerator
-//      - den       : Denominator
-//
-// Return value     : Result of the division (as a int32_t), i.e., the
-//                    integer part of num/den.
-//
-
-//
-// WebRtcSpl_Energy(...)
-//
-// Calculates the energy of a vector
-//
-// Input:
-//      - vector        : Vector which the energy should be calculated on
-//      - vector_length : Number of samples in vector
-//
-// Output:
-//      - scale_factor  : Number of left bit shifts needed to get the physical
-//                        energy value, i.e, to get the Q0 value
-//
-// Return value         : Energy value in Q(-|scale_factor|)
-//
-
+#endif  // COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_

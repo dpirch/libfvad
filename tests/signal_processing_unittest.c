@@ -21,8 +21,7 @@ void test_main() {
     int b = WEBRTC_SPL_WORD32_MAX;
 
     EXPECT_EQ(-63, WEBRTC_SPL_MUL(a, B));
-    EXPECT_EQ(-2147483645, WEBRTC_SPL_MUL(a, b));
-
+    EXPECT_EQ(-2147483645, WEBRTC_SPL_MUL(a, b)); // note: this check has been removed in upstream webrtc
 }
 #endif // TEST_SPL_MACRO
 

@@ -12,8 +12,8 @@
 // This header file includes the inline functions in
 // the fix point signal processing library.
 
-#ifndef WEBRTC_SPL_SPL_INL_H_
-#define WEBRTC_SPL_SPL_INL_H_
+#ifndef COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_
+#define COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_
 
 #include "../common.h"
 
@@ -39,7 +39,7 @@ static __inline int WebRtcSpl_CountLeadingZeros32_NotBuiltin(uint32_t n) {
 // Returns the number of leading zero bits in the argument.
 static __inline int WebRtcSpl_CountLeadingZeros32(uint32_t n) {
 #ifdef __GNUC__
-  COMPILE_ASSERT(sizeof(unsigned int) == sizeof(uint32_t));
+  RTC_COMPILE_ASSERT(sizeof(unsigned int) == sizeof(uint32_t));
   return n == 0 ? 32 : __builtin_clz(n);
 #else
   return WebRtcSpl_CountLeadingZeros32_NotBuiltin(n);
@@ -64,4 +64,4 @@ static __inline int16_t WebRtcSpl_NormU32(uint32_t a) {
 }
 
 
-#endif  // WEBRTC_SPL_SPL_INL_H_
+#endif  // COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_

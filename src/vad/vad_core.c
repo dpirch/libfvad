@@ -112,8 +112,8 @@ static int32_t WeightedAverage(int16_t* data, int16_t offset,
 // undefined behavior, so not a good idea; this just makes UBSan ignore the
 // violation, so that our old code can continue to do what it's always been
 // doing.)
-static inline int32_t OverflowingMulS16ByS32ToS32(int16_t a, int32_t b)
-    RTC_NO_SANITIZE("signed-integer-overflow") {
+static inline int32_t RTC_NO_SANITIZE("signed-integer-overflow")
+    OverflowingMulS16ByS32ToS32(int16_t a, int32_t b) {
   return a * b;
 }
 
@@ -238,7 +238,7 @@ static int16_t GmmProbability(VadInstT* self, int16_t* features,
           (int32_t) (log_likelihood_ratio * kSpectrumWeight[channel]);
 
       // Local VAD decision.
-      if ((log_likelihood_ratio << 2) > individualTest) {
+      if ((log_likelihood_ratio * 4) > individualTest) {
         vadflag = 1;
       }
 

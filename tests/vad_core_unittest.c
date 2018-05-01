@@ -17,10 +17,10 @@ void test_main() {
   // Test WebRtcVad_InitCore().
   VadInstT* self = malloc(sizeof(VadInstT));
 
-  // NULL pointer test.
-  EXPECT_EQ(-1, WebRtcVad_InitCore(NULL));
+  // null pointer test.
+  EXPECT_EQ(-1, WebRtcVad_InitCore(nullptr));
 
-  // Verify return = 0 for non-NULL pointer.
+  // Verify return = 0 for non-null pointer.
   EXPECT_EQ(0, WebRtcVad_InitCore(self));
   // Verify init_flag is set.
   EXPECT_EQ(42, self->init_flag);
@@ -34,7 +34,7 @@ void test_main() {
 void test_main() {
   VadInstT* self = malloc(sizeof(VadInstT));
 
-  // TODO(bjornv): Add NULL pointer check if we take care of it in
+  // TODO(bjornv): Add null pointer check if we take care of it in
   // vad_core.c
 
   ASSERT_EQ(0, WebRtcVad_InitCore(self));
@@ -57,7 +57,7 @@ void test_main() {
   VadInstT* self = malloc(sizeof(VadInstT));
   int16_t speech[kMaxFrameLength];
 
-  // TODO(bjornv): Add NULL pointer check if we take care of it in
+  // TODO(bjornv): Add null pointer check if we take care of it in
   // vad_core.c
 
   // Test WebRtcVad_CalcVadXXkhz()

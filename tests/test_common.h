@@ -22,4 +22,6 @@
 void assert_fail(const char *s, const char *file, int line);
 void expect_fail(const char *s, const char *file, int line);
 
+#define nullptr NULL
+
 #endif // TEST_COMMON_H_
