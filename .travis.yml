@@ -8,6 +8,6 @@ before_install:
   - sudo apt-get install libsndfile1-dev
 
 script:
-  - ./bootstrap
+  - autoreconf -i
   - ./configure
-  - make DISTCHECK_CONFIGURE_FLAGS='--enable-examples' distcheck
+  - make distcheck

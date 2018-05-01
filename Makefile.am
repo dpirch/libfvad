@@ -3,8 +3,9 @@ if BUILD_EXAMPLES
 endif
 
 SUBDIRS = src $(examples_dir) tests
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-examples
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = bootstrap LICENSE PATENTS README.md tools
+EXTRA_DIST = LICENSE PATENTS README.md
 
 # install pkgconfig file
 pkgconfigdir = $(libdir)/pkgconfig

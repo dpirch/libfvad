@@ -8,8 +8,6 @@ AM_INIT_AUTOMAKE([
 ])
 
 AC_PROG_CC
-AX_APPEND_COMPILE_FLAGS([-std=c11 -Wall -Wpedantic])
-AC_PROG_CC_STDC
 
 LT_INIT([disable-static pic-only])
 

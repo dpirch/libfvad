@@ -28,7 +28,7 @@ void expect_fail(const char *s, const char *file, int line)
 // function to be defined by individual tests
 void test_main(void);
 
-int main(int argc, char *argv[])
+int main()
 {
     test_main();
     if (expect_failed) exit(2);

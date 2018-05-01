@@ -26,7 +26,7 @@ static int (*const process_funcs[])(VadInstT*, const int16_t*, size_t) = {
 };
 
 // valid frame lengths in ms
-static const int valid_frame_times[] = { 10, 20, 30 };
+static const size_t valid_frame_times[] = { 10, 20, 30 };
 
 
 struct Fvad {
@@ -72,7 +72,7 @@ int fvad_set_mode(Fvad* inst, int mode)
 int fvad_set_sample_rate(Fvad* inst, int sample_rate)
 {
     assert(inst);
-    for (int i = 0; i < arraysize(valid_rates); i++) {
+    for (size_t i = 0; i < arraysize(valid_rates); i++) {
         if (valid_rates[i] * 1000 == sample_rate) {
             inst->rate_idx = i;
             return 0;
@@ -85,7 +85,7 @@ int fvad_set_sample_rate(Fvad* inst, int sample_rate)
 static bool valid_length(int rate_idx, size_t length)
 {
     int samples_per_ms = valid_rates[rate_idx];
-    for (int i = 0; i < arraysize(valid_frame_times); i++) {
+    for (size_t i = 0; i < arraysize(valid_frame_times); i++) {
         if (valid_frame_times[i] * samples_per_ms == length)
             return true;
     }

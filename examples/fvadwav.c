@@ -35,7 +35,7 @@ static bool process_sf(SNDFILE *infile, Fvad *vad,
         goto end;
     }
 
-    while (sf_read_double(infile, buf0, framelen) == framelen) {
+    while (sf_read_double(infile, buf0, framelen) == (sf_count_t)framelen) {
 
         // Convert the read samples to int16
         for (size_t i = 0; i < framelen; i++)
