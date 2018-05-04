@@ -15,6 +15,10 @@
 #ifndef COMMON_AUDIO_VAD_VAD_FILTERBANK_H_
 #define COMMON_AUDIO_VAD_VAD_FILTERBANK_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "vad_core.h"
 
 // Takes |data_length| samples of |data_in| and calculates the logarithm of the
@@ -39,5 +43,9 @@
 //                        exact. It is only used in a comparison.)
 int16_t WebRtcVad_CalculateFeatures(VadInstT* self, const int16_t* data_in,
                                     size_t data_length, int16_t* features);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_VAD_VAD_FILTERBANK_H_

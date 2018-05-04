@@ -14,6 +14,10 @@
 #ifndef COMMON_AUDIO_VAD_VAD_SP_H_
 #define COMMON_AUDIO_VAD_VAD_SP_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "vad_core.h"
 
 // Downsamples the signal by a factor 2, eg. 32->16 or 16->8.
@@ -51,5 +55,9 @@ void WebRtcVad_Downsampling(const int16_t* signal_in,
 int16_t WebRtcVad_FindMinimum(VadInstT* handle,
                               int16_t feature_value,
                               int channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_VAD_VAD_SP_H_
