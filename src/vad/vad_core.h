@@ -16,6 +16,10 @@
 #ifndef COMMON_AUDIO_VAD_VAD_CORE_H_
 #define COMMON_AUDIO_VAD_VAD_CORE_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "../signal_processing/signal_processing_library.h"
 
 enum { kNumChannels = 6 };  // Number of frequency bands (named channels).
@@ -107,5 +111,9 @@ int WebRtcVad_CalcVad16khz(VadInstT* inst, const int16_t* speech_frame,
                            size_t frame_length);
 int WebRtcVad_CalcVad8khz(VadInstT* inst, const int16_t* speech_frame,
                           size_t frame_length);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_VAD_VAD_CORE_H_

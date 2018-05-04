@@ -17,6 +17,10 @@
 #ifndef COMMON_AUDIO_SIGNAL_PROCESSING_RESAMPLE_BY_2_INTERNAL_H_
 #define COMMON_AUDIO_SIGNAL_PROCESSING_RESAMPLE_BY_2_INTERNAL_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "../common.h"
 
 /*******************************************************************
@@ -31,5 +35,9 @@ void WebRtcSpl_DownBy2ShortToInt(const int16_t *in, int32_t len,
 
 void WebRtcSpl_LPBy2IntToInt(const int32_t* in, int32_t len, int32_t* out,
                              int32_t* state);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_SIGNAL_PROCESSING_RESAMPLE_BY_2_INTERNAL_H_

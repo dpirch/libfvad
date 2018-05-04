@@ -15,6 +15,10 @@
 #ifndef COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_
 #define COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "../common.h"
 
 extern const int8_t kWebRtcSpl_CountLeadingZeros32_Table[64];
@@ -63,5 +67,8 @@ static __inline int16_t WebRtcSpl_NormU32(uint32_t a) {
   return a == 0 ? 0 : WebRtcSpl_CountLeadingZeros32(a);
 }
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SPL_INL_H_

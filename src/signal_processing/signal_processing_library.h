@@ -18,6 +18,10 @@
 #ifndef COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_
 #define COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "../common.h"
 
 // Macros specific for the fixed point implementation
@@ -89,5 +93,8 @@ void WebRtcSpl_ResetResample48khzTo8khz(WebRtcSpl_State48khzTo8khz* state);
  * END OF RESAMPLING FUNCTIONS
  ************************************************************/
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE_SIGNAL_PROCESSING_LIBRARY_H_
