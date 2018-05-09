@@ -1,15 +1,12 @@
 os: linux
-sudo: false
-dist: trusty
 language: c
-compiler: gcc-7
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - gcc-7
     - libsndfile1-dev
+compiler:
+  - gcc
+  - clang
 script:
   - autoreconf -i
   - ./configure

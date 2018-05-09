@@ -1,4 +1,5 @@
 AC_INIT([libfvad],[1.0],[dpirch@gmail.com],[],[https://github.com/dpirch/libfvad])
+AC_PREREQ([2.60]) # for _AC_C_STD_TRY
 AC_CONFIG_SRCDIR([src/fvad.c])
 AC_CONFIG_AUX_DIR([ac-aux])
 AC_CONFIG_MACRO_DIR([m4])
@@ -8,6 +9,18 @@ AM_INIT_AUTOMAKE([
 ])
 
 AC_PROG_CC
+
+# Try to make the compiler support C11 (and C99). Necessary for older versions
+# of gcc and clang (e.g. gcc 4.8) that default to C89.
+# Temporary solution until autoconf 2.70, when we can use AC_PROG_CC for this.
+_AC_C_STD_TRY(
+    [c11],
+    [#include <assert.h>],
+    [static_assert(1, "foo"); for (int i = 0; i < 1; i++) ],
+    [-std=gnu11 -std=c11],
+    [],
+    [AC_MSG_ERROR([compiler does not support C11])]
+)
 
 LT_INIT([disable-static pic-only])
 
