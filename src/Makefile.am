@@ -26,7 +26,7 @@ libfvad_int_la_SOURCES = \
 # main public libary
 lib_LTLIBRARIES = libfvad.la
 libfvad_la_SOURCES =
-libfvad_la_LDFLAGS = -version-info 0:0:0 -export-symbols-regex '^fvad_'
+libfvad_la_LDFLAGS = -version-info 0:0:0 -export-symbols-regex '^fvad_' -no-undefined
 libfvad_la_LIBADD = libfvad_int.la
 
 

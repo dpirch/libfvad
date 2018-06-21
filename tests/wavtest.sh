@@ -25,4 +25,4 @@ for SMPRATE in 8 16 32 48; do
 done
 
 echo "comparing result..."
-diff "$RESULTFILE" "$EXPECTFILE" || exit 2
+diff -b "$RESULTFILE" "$EXPECTFILE" || exit 2
