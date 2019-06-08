@@ -15,7 +15,7 @@ sudo make install
 ```
 
  - When building from the cloned git repository (instead of a downloaded release),
-   run `autoreconf -i` to create the missing *configure* script.
+   run `autoreconf -i` to create the missing *configure* script (this requires autoconf, libtool and pkg-config; e.g. run `sudo apt install autoconf libtool pkg-config` on Debian/Ubuntu first).
  - An optional example can be enabled enabled by `./configure --enable-examples`.
    This requires libsndfile (http://www.mega-nerd.com/libsndfile/, e.g.
    `apt install libsndfile1-dev`).
