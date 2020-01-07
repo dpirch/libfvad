@@ -33,7 +33,7 @@ typedef struct Fvad Fvad;
  *
  * Returns NULL in case of a memory allocation error.
  */
-Fvad *fvad_new();
+Fvad *fvad_new(void);
 
 /*
  * Frees the dynamic memory of a specified VAD instance.
