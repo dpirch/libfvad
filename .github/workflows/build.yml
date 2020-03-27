@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+    branches:
+    - !master
+    pull_request:
+    - !master
+
+jobs:
+  build-mac:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: install auto...
+      run: brew install autoconf automake libtool libsndfile
+    - name: configure
+      run: autoreconf -i && ./configure
+    - name: build
+      run: make
+    - name: publish
+      run: ls src/.libs/libfvad.0.dylib
+  
