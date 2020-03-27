@@ -23,3 +23,16 @@ jobs:
       run: make
     - name: exists
       run: ls src/.libs/libfvad.so.0.0.0
+  
+  build-mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: install auto...
+      run: brew install autoconf automake libtool libsndfile pkg-config
+    - name: configure
+      run: autoreconf -i && ./configure
+    - name: build
+      run: make
+    - name: publish
+      run: ls src/.libs/libfvad.0.dylib
