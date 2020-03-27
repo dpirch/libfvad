@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    branches-ignore:
+      - master
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: refresh apt repo
+      run: sudo apt-get update
+    - name: install auto...
+      run: sudo apt-get install autoconf automake libtool libsndfile-dev -y
+    - name: configure
+      run: autoreconf -i && ./configure
+    - name: build
+      run: make
+    - name: exists
+      run: ls src/.libs/libfvad.so.0.0.0
