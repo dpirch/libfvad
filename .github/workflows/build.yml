@@ -20,4 +20,16 @@ jobs:
       run: make
     - name: publish
       run: ls src/.libs/libfvad.0.dylib
-  
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: refresh apt repo
+      run: apt-get update
+    - name: install auto...
+      run: apt-get install autoconf automake libtool libsndfile-dev -y
+    - name: configure
+      run: autoreconf -i && ./configure
+    - name: build
+      run: make
+    - name: publish
+      run: ls src/.libs/libfvad.so.0.0.0
