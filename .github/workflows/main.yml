@@ -18,9 +18,14 @@ jobs:
       run: autoreconf -i && ./configure
     - name: build
       run: make
-    - name: exists
-      run: ls src/.libs/libfvad.so.0.0.0
-  
+    - name: verify
+      run: file src/.libs/libfvad.so.0.0.0
+    - name: publish artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: ubuntu
+        path: src/.libs/libfvad.so.0.0.0
+
   build-mac:
     runs-on: macos-latest
     steps:
@@ -31,8 +36,13 @@ jobs:
       run: autoreconf -i && ./configure
     - name: build
       run: make
-    - name: publish
-      run: ls src/.libs/libfvad.0.dylib
+    - name: verify
+      run: file src/.libs/libfvad.0.dylib
+    - name: publish artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: mac
+        path: src/.libs/libfvad.0.dylib
 
   build-windows-32bit:
     runs-on: ubuntu-latest
@@ -46,8 +56,13 @@ jobs:
       run: autoreconf -i && ./configure --host=i686-w64-mingw32
     - name: build
       run: make
-    - name: exists
-      run: ls src/.libs/libfvad-0.dll
+    - name: verify
+      run: file src/.libs/libfvad-0.dll
+    - name: publish artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: win32
+        path: src/.libs/libfvad-0.dll
 
   build-windows-64bit:
     runs-on: ubuntu-latest
@@ -61,5 +76,10 @@ jobs:
       run: autoreconf -i && ./configure --host=x86_64-w64-mingw32
     - name: build
       run: make
-    - name: exists
-      run: ls src/.libs/libfvad-0.dll
+    - name: verify
+      run: file src/.libs/libfvad-0.dll
+    - name: publish artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: win64
+        path: src/.libs/libfvad-0.dll
