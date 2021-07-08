@@ -19,7 +19,7 @@ set(SOURCES common.h
             vad/vad_gmm.c
             vad/vad_sp.h
             vad/vad_sp.c)
-            
+
 add_library(fvad STATIC ${SOURCES})
 set_property(TARGET fvad PROPERTY POSITION_INDEPENDENT_CODE 1)
 install(TARGETS fvad DESTINATION lib)
