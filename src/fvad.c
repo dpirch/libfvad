@@ -37,7 +37,7 @@ struct Fvad {
 
 Fvad *fvad_new(void)
 {
-    Fvad *inst = malloc(sizeof *inst);
+    Fvad *inst = (Fvad *)malloc(sizeof *inst);
     if (inst) fvad_reset(inst);
     return inst;
 }
