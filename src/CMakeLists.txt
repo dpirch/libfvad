@@ -21,5 +21,11 @@ set(SOURCES common.h
             vad/vad_sp.c)
 
 add_library(fvad STATIC ${SOURCES})
+
+target_include_directories(fvad
+    PUBLIC
+        ../include
+)
+
 set_property(TARGET fvad PROPERTY POSITION_INDEPENDENT_CODE 1)
 install(TARGETS fvad DESTINATION lib)
