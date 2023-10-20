@@ -48,6 +48,9 @@ typedef struct VadInstT_ {
     int16_t individual[3];
     int16_t total[3];
 
+    int16_t feature_vector[kNumChannels];
+    int16_t total_power;
+
     int init_flag;
 } VadInstT;
 
